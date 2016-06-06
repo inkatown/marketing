@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0041)http://www.nutrophy.com/catalog/login.php -->
+<HTML><HEAD><TITLE>Nutrophy | Trend Analyzer</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252"><LINK 
+href="../catalog/includes/stylesheet.css" type=text/css rel=stylesheet>
+<link rel="stylesheet" type="text/css" href="spiffyCal.css">
+<script language="JavaScript" src="spiffyCal.js"></script>
+<?php
+#$todaysdate = date("Y-m-d", time());
+#$tomorrowsdate = date("Y-m-d", time()+24*60*60);
+$todaysdate = date("d-m-Y", time());
+$tomorrowsdate = date("d-m-Y", time()+24*60*60);
+?>
+<script language="javascript">
+var cal1=new ctlSpiffyCalendarBox(
+"cal1", 
+"tempstats", 
+"pubdate",
+"btnDate1",
+"<?php echo $todaysdate; ?>");
+
+var cal2=new ctlSpiffyCalendarBox(
+"cal2", 
+"tempstats", 
+"expdate",
+"btnDate1",
+"<?php echo $tomorrowsdate; ?>");
+
+</script>
+
+
+
+
+<META content="MSHTML 6.00.2800.1141" name=GENERATOR></HEAD>
+<BODY bottomMargin=0 bgColor=#ffffff leftMargin=0 topMargin=0 rightMargin=0 
+marginheight="0" marginwidth="0"><!-- header //-->
+<div id="spiffycalendar" class="text"></div>
+<?
+  $db = mysql_connect("localhost", "oscommerce", "oscommerce") or die ("NO CONNECTION");;
+  mysql_select_db("catalog", $db);
+  $result = mysql_query("select c_name, c_id from campaigns",$db);
+
+//print $row[1];
+//print "stop";
+//print count($row);
+?>
+
+<!-- header_eof //--><!-- body //-->
+<TABLE cellSpacing=0 cellPadding=0 width=748 align=center border=0>
+  <TBODY>
+  <TR><!-- body_text //-->
+    <TD vAlign=top width="100%">
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD height=30><IMG height=30 
+            src="/images/topBanner.jpg" width=626></TD></TR>
+        <TR>
+          <TD height=1><IMG height=1 
+            src="http://localhost/images/spacer(1).gif" 
+            width=1></TD></TR>
+        <TR>
+          <TD>
+            <TABLE cellSpacing=0 cellPadding=0 width="100%">
+              <TBODY>
+              <TR>
+                      <TD bgColor=#336699>&nbsp;&nbsp;<SPAN 
+                  class=HeaderOneWhite>Campaign Trend Analizer</SPAN></TD>
+                <TD bgColor=#336699><IMG height=27 
+                  src="http://localhost/images/spacer(1).gif" 
+                  width=1></TD></TR></TBODY></TABLE></TD></TR>
+        <TR>
+          <TD>
+            <FORM name=tempstats 
+            action="../cgi-bin/readhtml123.pl" 
+            method=GET><BR>
+            <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+              <TBODY>
+              <TR>
+                        <TD noWrap align=right><FONT face="Verdana, Arial" 
+                  color=#000000 size=2>&nbsp;Campaing Name:&nbsp;</FONT></TD>
+                        <TD noWrap align=left><FONT face="Verdana, Arial" color=#000000 
+                  size=2>
+                          <select name="campaignBox">
+                            
+			    <?while($row = mysql_fetch_array($result)) {
+
+  				$sel="";
+				if(!strcmp($_GET['c_id'],$row[1])){
+					$sel="selected";
+				}
+				
+				printf("<option value=\"%s\" %s>",$row[0],$sel);
+
+  				echo $row[0];
+
+  				echo '</option>';
+			     }
+			     ?>
+                          </select>&nbsp;
+                          </FONT></TD>
+                      </TR>
+              <TR>
+                        <TD noWrap align=right><FONT face="Verdana, Arial" 
+                  color=#000000 size=2>&nbsp;Beg_date:&nbsp;</FONT></TD>
+                        <TD><SCRIPT language="JavaScript">cal1.writeControl();</SCRIPT> </TD>
+                      </TR>
+				  <TR>
+                        <TD noWrap align=right><FONT face="Verdana, Arial" 
+                  color=#000000 size=2>&nbsp;End_date:&nbsp;</FONT></TD>
+                        <TD><SCRIPT language="JavaScript">cal2.writeControl();</SCRIPT> </TD>
+                      </TR>
+				  <TR>
+                        <TD noWrap align=right><FONT face="Verdana, Arial" 
+                  color=#000000 size=2>&nbsp;Report_Type:&nbsp;</FONT></TD>
+                        <TD noWrap><FONT face="Verdana, Arial" color=#000000 
+                  size=2>
+                          <select name="reportBox" disabled="disabled">
+                            <option value="visits">visits</option>
+                            <option value="trends" selected>trends</option>
+                          </select>
+                          &nbsp;</FONT></TD>
+                      </TR></TBODY></TABLE>
+            <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD colSpan=2><BR><IMG height=1 
+                  src="http://localhost/images/pixel_black.gif" width="100%" 
+                  border=0></TD></TR>
+              <TR>
+                <TD vAlign=top noWrap><!--<font face="Verdana, Arial" size="1" color="#000000">&nbsp;<label for="setcookie"><input type="checkbox" name="setcookie" value="1" id="setcookie" >&nbsp;Save login information in a cookie?</label>&nbsp;</font> --></TD>
+                <TD><INPUT type=image 
+                  src="/images/button_submit.gif" align=right 
+                  value=login nowrap valign="top"></TD></TR>
+              <TR>
+                        <TD noWrap align=right colSpan=2>&nbsp;</TD>
+                      </TR><!--          <tr>
+            <td align="right" colspan="2" nowrap><font face="Verdana, Arial" size="1" color="#000000">&nbsp;<a href="http://www.nutrophy.com/catalog/create_account.php">No account with us? Click here to create one.</a>&nbsp;</font></td>
+          </tr> --></TBODY></TABLE></FORM></TD></TR></TBODY></TABLE></TD><!-- body_text_eof //-->
+    <TD vAlign=top align=left><IMG height=1 
+      src="http://localhost/images/spacer(1).gif" width=1></TD>
+    <TD vAlign=top width=121>
+      <TABLE cellSpacing=0 cellPadding=0 width=121 border=0>
+        <TBODY>
+        <TR>
+          <TD width="100%">
+            <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0><!-- right_navigation //-->
+              <TBODY></TBODY></TABLE>
+            <TABLE class=noprint height="100%" cellSpacing=0 cellPadding=0 
+            width="100%" bgColor=#ffcc00 border=0 valign="top">
+              <TBODY>
+              <TR>
+                <TD vAlign=top></TD></TR>
+              <TR>
+                <TD vAlign=top height="100%">
+                  <TABLE cellSpacing=0 cellPadding=1 width=121 border=0 
+                  valign="top">
+                    <TBODY>
+                    <TR>
+                      <TD noWrap width=10>&nbsp;</TD>
+                              <TD class=navMenuHeader>&nbsp;</TD>
+                            </TR>
+                    <TR>
+                      <TD noWrap width=10><form name=updateall method="post" action="../cgi-bin/trendall.pl"> <input type="submit" name="Submit" value="Update Stats"></form></TD>
+                              <TD class=navMenuHeader>&nbsp;</TD>
+                            </TR>
+                    <TR>
+                      <TD noWrap width=10>&nbsp;</TD>
+                              <TD class=navMenuItem>&nbsp;</TD>
+                            </TR>
+                    <TR>
+                      <TD noWrap width=10>&nbsp;</TD>
+                              <TD class=navMenuItem>&nbsp;</TD>
+                            </TR>
+                    <TR>
+                      <TD noWrap width=10>&nbsp;</TD>
+                              <TD class=navMenuItem>&nbsp;</TD>
+                            </TR>
+                    <TR>
+                      <TD noWrap width=10>&nbsp;</TD>
+                              <TD class=navMenuItem>&nbsp;</TD>
+                            </TR>
+                    <TR>
+                      <TD noWrap width=10>&nbsp;</TD>
+                              <TD class=navMenuHeader>&nbsp;</TD>
+                            </TR>
+                    <TR>
+                      <TD noWrap width=10>&nbsp;</TD>
+                              <TD class=navMenuItem>&nbsp;</TD>
+                            </TR>
+                    <TR>
+                      <TD noWrap width=10>&nbsp;</TD>
+                              <TD class=navMenuItem>&nbsp;</TD>
+                            </TR>
+                    <TR>
+                      <TD noWrap width=10>&nbsp;</TD>
+                              <TD class=navMenuItem>&nbsp;</TD>
+                            </TR>
+                    <TR>
+                      <TD noWrap width=10>&nbsp;</TD>
+                              <TD class=navMenuHeader>&nbsp;</TD>
+                            </TR>
+                    <TR>
+                      <TD noWrap width=10>&nbsp;</TD>
+                              <TD class=navMenuHeader>&nbsp;</TD>
+                            </TR>
+                    <TR>
+                      <TD noWrap width=10>&nbsp;</TD>
+                              <TD class=navMenuHeader>&nbsp;</TD>
+                            </TR>
+                    <TR>
+                      <TD noWrap width=10>&nbsp;</TD>
+                              <TD class=navMenuItem>&nbsp;</TD>
+                            </TR>
+                    <TR>
+                      <TD noWrap width=10>&nbsp;</TD>
+                      <TD>&nbsp;</TD></TR>
+                    <TR>
+                      <TD noWrap 
+                    width=10>&nbsp;</TD><!-- Buttons Start --></TR></TBODY></TABLE>
+                  <TABLE cellSpacing=0 cellPadding=2 width=1 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD noWrap width=5>&nbsp;</TD>
+                              <TD>&nbsp;</TD>
+                              </A></TR></TBODY></TABLE><!-- Buttons End --></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><!-- right_navigation_eof //--></TR></TBODY></TABLE></TD></TR></TABLE></TD></TR></TABLE><!-- body_eof //--><!-- footer //--><!-- footer_eof //--><BR></BODY></HTML>
